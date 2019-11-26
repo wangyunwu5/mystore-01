@@ -23,5 +23,9 @@ public class myStoreController {
 		System.out.println("请求成功");
 		return new ResponseBean(200,"提交成功",goodsObject);
 	}
-	
+	@RequestMapping(value="/goods/{goodsid}",method=RequestMethod.DELETE)
+	public ResponseBean deleteGoods(@PathVariable("goodsid")Integer goodsId) {
+		System.out.println("删除成功");
+		return new ResponseBean(200,"提交成功",null);
+	}
 }
