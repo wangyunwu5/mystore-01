@@ -1,14 +1,24 @@
 package cn.yang.store.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 @Entity
+@EntityListeners(AuditingEntityListener.class)//设置时间
 @Table(name="goods")
 public class Goods {
 	
@@ -30,13 +40,15 @@ public class Goods {
 	private Integer sales;//销量
 	
 	@Column(name="goods_describe")
-	private Integer goodsDescribe;//商品描述
+	private String goodsDescribe;//商品描述
 	
 	@Column(name="create_time")
-	private String createTime;//添加时间
+	@CreatedDate
+	private Date createTime;//创建时间
 	
 	@Column(name="update_time")
-	private String updateTime;//更新时间
+	@LastModifiedDate
+	private Date updateTime;//更新时间
 
 	public Integer getId() {
 		return id;
@@ -78,27 +90,27 @@ public class Goods {
 		this.sales = sales;
 	}
 
-	public Integer getGoodsDescribe() {
+	public String getGoodsDescribe() {
 		return goodsDescribe;
 	}
 
-	public void setGoodsDescribe(Integer goodsDescribe) {
+	public void setGoodsDescribe(String goodsDescribe) {
 		this.goodsDescribe = goodsDescribe;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
