@@ -17,6 +17,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.yang.store.common.ResponseBean;
 import cn.yang.store.entity.Goods;
+import cn.yang.store.entity.GoodsImage;
+import cn.yang.store.entity.GoodsParameter;
 import cn.yang.store.entity.GoodsType;
 import cn.yang.store.service.GoodsService;
 import cn.yang.store.service.ImgUploadService;
@@ -69,7 +71,6 @@ public class myStoreController {
 		goodsService.saveGoods(goods);
 		List<Goods> goodsNew = goodsService.findGoodsList();
 		return new ResponseBean(200,"提交成功",goodsNew);
-	
 	}
 	/**
 	 * 通过id删除一个goods数据
@@ -79,7 +80,6 @@ public class myStoreController {
 	@RequestMapping(value="/goods/{goodsid}",method=RequestMethod.DELETE)
 	public ResponseBean deleteGoods(@PathVariable("goodsid")Integer goodsId) {
 		goodsService.deleteGoodsById(goodsId);
-		System.out.println("删除成功");
 		return new ResponseBean(200,"提交成功",null);
 	}
 	
@@ -115,6 +115,103 @@ public class myStoreController {
 	public ResponseBean deleteGoodsType(@RequestParam("goodstypeid")Integer typeId) {
 		goodsService.deleteGoodsTypeById(typeId);
 		return new ResponseBean(200,"删除成功",null);
+	}
+	
+	/**
+	 * 添加一个goodsParameter数据
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value="/goods/parameter",method=RequestMethod.POST)
+	public ResponseBean saveGoodsParameter(@RequestBody JSONObject param) {
+		JSONObject gp = param.getJSONObject("goodsparameter");
+		GoodsParameter goodsParameter = (GoodsParameter)JSONObject.toJavaObject(gp,GoodsParameter.class);
+		goodsService.saveGoodsParameter(goodsParameter);
+		
+		return new ResponseBean(200,"提交成功",null);
+	}
+	/**
+	 * 通过id获取一个goodsparameter数据
+	 * @param goodsParameterId
+	 * @return
+	 */
+	@RequestMapping(value="/goods/parameter",method=RequestMethod.GET)
+	public ResponseBean findOneGoodsParameterById(@RequestParam("goodsparameterid")Integer goodsParameterId) {
+		if(goodsParameterId == null || goodsParameterId.equals("")) {
+			return new ResponseBean(403,"服务器拒绝请求，提交的参数为空",null);
+		}
+		else {
+			GoodsParameter goodsParameter = goodsService.findOneGoodsParameterById(goodsParameterId);
+			JSONObject parameterObject = new JSONObject();
+			parameterObject.put("goodsparameter",goodsParameter);
+			return new ResponseBean(200,"请求成功",parameterObject);
+		}
+	}
+	/**
+	 * 获取goodsParameter列表
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/goods/parameters",method=RequestMethod.GET)
+	public ResponseBean findGoodsParameterList() throws IOException {
+		List<GoodsParameter> goodsParameters = goodsService.findGoodsParameterList();
+		JSONObject parameterObject = new JSONObject();
+		parameterObject.put("goodsparameters",goodsParameters);
+		return new ResponseBean(200,"请求成功",parameterObject);
+	}
+	
+	/**
+	 * 通过id删除一个goodsparameter
+	 * @param goodsParameterId
+	 * @return
+	 */
+	@RequestMapping(value="/goods/parameter",method=RequestMethod.DELETE)
+	public ResponseBean deleteGoodsParameterById(@RequestParam("goodsparameterid")Integer goodsParameterId) {
+		if(goodsParameterId == null || goodsParameterId.equals("")) {
+			return new ResponseBean(403,"服务器拒绝请求，提交的参数为空",null);
+		}
+		else {
+			goodsService.deleteGoodsParameterById(goodsParameterId);
+			return new ResponseBean(200,"删除成功",null);
+		}
+	}
+	
+	/**
+	 * 通过id获取一个goodsimage信息
+	 * @param goodsImageId
+	 * @return
+	 */
+	@RequestMapping(value="/goods/image",method=RequestMethod.GET)
+	public ResponseBean findOneGoodsImage(@RequestParam("goodsimageid")Integer goodsImageId) {
+		if(goodsImageId == null || goodsImageId.equals("")) {
+			return new ResponseBean(403,"服务器拒绝请求，提交的参数为空",null);
+		}
+		else {
+		    GoodsImage goodsImage= goodsService.findOneGoodsImageById(goodsImageId);
+		    JSONObject goodsImageObject = new JSONObject();
+		    goodsImageObject.put("goodsimage",goodsImage);
+		    return new ResponseBean(200,"请求成功",goodsImageObject);
+		}
+	}
+	/**
+	 * 获取GoodsImage列表
+	 * @return
+	 */
+	@RequestMapping(value="/goods/images",method=RequestMethod.GET)
+	public ResponseBean findGoodsImageList() throws IOException{
+		List<GoodsImage> goodsImages = goodsService.findGoodsImageList();
+		JSONObject goodsImageList = new JSONObject();
+		goodsImageList.put("goodsimage",goodsImages);
+		return new ResponseBean(200,"请求成功",goodsImageList);
+	}
+	/**
+	 * 保存一个goodsImage数据
+	 * @return
+	 */
+	@RequestMapping(value="/goods/image",method = RequestMethod.POST)
+	public ResponseBean saveGoodsImage(@RequestBody JSONObject param) {
+		
+		return new ResponseBean(200,"提交成功",null);
 	}
 	
 } 

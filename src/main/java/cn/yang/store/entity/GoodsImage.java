@@ -1,13 +1,20 @@
 package cn.yang.store.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
+@EntityListeners(AuditingEntityListener.class)//设置时间
 @Table(name="goods_image")
 public class GoodsImage {
 
@@ -30,10 +37,14 @@ public class GoodsImage {
 	private Integer imageIndex;//图片下标，编号
 	
 	@Column(name="create_time")
-	private String createTime;//图片创建时间
+	@CreatedDate
+	private Date createTime;//图片创建时间
 	
 	@Column(name="update_time")
-	private String updateTime;//图片更新时间
+	private Date updateTime;//图片更新时间
+	
+	@Column(name="is_delete")
+	private Integer isDelete;
 
 	public Integer getId() {
 		return id;
@@ -75,26 +86,36 @@ public class GoodsImage {
 		this.imageIndex = imageIndex;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override
 	public String toString() {
 		return "GoodsImage [id=" + id + ", goodsId=" + goodsId + ", imageUrl=" + imageUrl + ", imageType=" + imageType
-				+ ", imageIndex=" + imageIndex + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ ", imageIndex=" + imageIndex + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", isDelete=" + isDelete + "]";
 	}
+
 	
 }

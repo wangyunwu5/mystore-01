@@ -31,10 +31,10 @@ public class Goods {
 	private String goodsName;//商品名称
 	
 	@Column(name="goods_type_id")
-	private Integer goodsTypeId;
+	private String goodsTypeId;
 	
 	@Column(name="scan")
-	private Integer scan;//浏览量
+	private Integer scan;//浏览量，org.springframework.data.annotation
 	
 	@Column(name="sales")
 	private Integer sales;//销量
@@ -49,6 +49,9 @@ public class Goods {
 	@Column(name="update_time")
 	@LastModifiedDate
 	private Date updateTime;//更新时间
+	
+	@Column(name="is_delete")
+	private Integer isDelete;
 
 	public Integer getId() {
 		return id;
@@ -66,11 +69,11 @@ public class Goods {
 		this.goodsName = goodsName;
 	}
 
-	public Integer getGoodsTypeId() {
+	public String getGoodsTypeId() {
 		return goodsTypeId;
 	}
 
-	public void setGoodsTypeId(Integer goodsTypeId) {
+	public void setGoodsTypeId(String goodsTypeId) {
 		this.goodsTypeId = goodsTypeId;
 	}
 
@@ -114,11 +117,19 @@ public class Goods {
 		this.updateTime = updateTime;
 	}
 
+	public Integer isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	@Override
 	public String toString() {
 		return "Goods [id=" + id + ", goodsName=" + goodsName + ", goodsTypeId=" + goodsTypeId + ", scan=" + scan
 				+ ", sales=" + sales + ", goodsDescribe=" + goodsDescribe + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + "]";
+				+ ", updateTime=" + updateTime + ", isDelete=" + isDelete + "]";
 	}
-
+	
 }

@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.yang.store.dao.GoodsDao;
+import cn.yang.store.dao.GoodsImageDao;
+import cn.yang.store.dao.GoodsParameterDao;
 import cn.yang.store.dao.GoodsTypeDao;
 import cn.yang.store.entity.Goods;
+import cn.yang.store.entity.GoodsImage;
+import cn.yang.store.entity.GoodsParameter;
 import cn.yang.store.entity.GoodsType;
 
 @Service
-@Transactional
+@Transactional //update或者delete操作需要事务，需要再service层定义事务，  表示spring的事务注解
 public class GoodsService {
 	
 	@Autowired
@@ -21,6 +25,12 @@ public class GoodsService {
 	
 	@Autowired
 	private GoodsTypeDao goodsTypeDao;
+	
+	@Autowired
+	private GoodsParameterDao goodsParameterDao;
+	
+	@Autowired
+	private GoodsImageDao goodsImageDao;
 	
 	public void saveGoods(Goods goods) {
 		goodsDao.save(goods);
@@ -35,8 +45,7 @@ public class GoodsService {
 	}
 	
 	public void deleteGoodsById(Integer goodsId) {
-		//Goods goods = this.findOneGoods(goodsId);
-		goodsDao.delete(findOneGoods(goodsId));
+		goodsDao.deleteGoodsById(goodsId);
 	}
 	
 	public List<GoodsType> findGoodsTypeList() {
@@ -52,8 +61,31 @@ public class GoodsService {
 	}
 	
 	public void deleteGoodsTypeById(Integer typeId) {
-		goodsTypeDao.delete(findOneGoodsType(typeId));
+		goodsTypeDao.deleteGoodsTypeById(typeId);
 	}
 
+	public void saveGoodsParameter(GoodsParameter goodsParameter) {
+		goodsParameterDao.save(goodsParameter);
+	}
+
+	public GoodsParameter findOneGoodsParameterById(Integer goodsParameterId) {
+		return goodsParameterDao.findOneParameter(goodsParameterId);
+	}
+	
+	public List<GoodsParameter> findGoodsParameterList(){
+		return goodsParameterDao.findParameterList();
+	}
+
+	public void deleteGoodsParameterById(Integer goodsParameterId) {
+		goodsParameterDao.deleteGoodsParameterById(goodsParameterId);
+	}
+
+	public GoodsImage findOneGoodsImageById(Integer goodsImageId) {
+		return goodsImageDao.findOneGoodsImageById(goodsImageId);
+	}
+
+	public List<GoodsImage> findGoodsImageList() {
+		return goodsImageDao.findGoodsImageList();
+	}
 	
 }
