@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -22,7 +23,10 @@ import cn.yang.store.entity.GoodsParameter;
 import cn.yang.store.entity.GoodsType;
 import cn.yang.store.service.GoodsService;
 import cn.yang.store.service.ImgUploadService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(description = "用户操作接口")
 @RestController
 @RequestMapping("/api/v1")
 public class myStoreController {
@@ -37,6 +41,7 @@ public class myStoreController {
 	 * @param goodsId
 	 * @return
 	 */
+	@ApiOperation(value = "获取goods信息",notes="通过id获取goods信息")
 	@RequestMapping(value="/goods/{goodsid}",method =RequestMethod.GET)
 	public ResponseBean getGoodsById(@PathVariable("goodsid")Integer goodsId) {
 		System.out.println("提交的参数为："+goodsId);
@@ -50,6 +55,7 @@ public class myStoreController {
 	 * 获取所有goods信息
 	 * @return
 	 */
+	@ApiOperation(value="获取所有goods信息列表")
 	@RequestMapping(value="/goodsList/",method =RequestMethod.GET)
 	public ResponseBean getGoodsList() {
 		List<Goods> goodsNew = goodsService.findGoodsList();
@@ -208,13 +214,33 @@ public class myStoreController {
 	 * 保存一个goodsImage数据
 	 * @return
 	 */
+	@ApiOperation(value="图片上传接口")
 	@RequestMapping(value="/goods/image",method = RequestMethod.POST)
-	public ResponseBean saveGoodsImage(@RequestBody JSONObject param) {
-		
+	public ResponseBean uploadImage(MultipartFile file) {
+		try {
+			String imgPath = imgService.uploadOne(file);
+			if(imgPath != null) {
+				JSONObject imgpath = new JSONObject();
+				imgpath.put("imgpath",imgPath);
+				return new ResponseBean(200,"上传成功成功",imgpath);
+			}else {
+				return new ResponseBean(400,"上传成功失败",null);
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseBean(400,"上传失败",null);
+		}
+	}
+	@ApiOperation(value="保存一个图片信息接口")
+	@RequestMapping(value="/goods/image_message",method=RequestMethod.POST)
+	public ResponseBean saveGoodsImageMessage(@RequestBody JSONObject param) {
+		JSONObject gi = param.getJSONObject("goodimage");
+		GoodsImage goodsImage = (GoodsImage)JSONObject.toJavaObject(gi,GoodsImage.class);
+		goodsService.saveGoodsImage(goodsImage);
 		return new ResponseBean(200,"提交成功",null);
 	}
-	
-} 
+}
 
 
 

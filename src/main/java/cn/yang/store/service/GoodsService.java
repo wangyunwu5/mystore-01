@@ -87,5 +87,9 @@ public class GoodsService {
 	public List<GoodsImage> findGoodsImageList() {
 		return goodsImageDao.findGoodsImageList();
 	}
+
+	public void saveGoodsImage(GoodsImage goodsImage) {
+		goodsImageDao.save(goodsImage);
+	}
 	
 }

@@ -38,7 +38,7 @@ public class ImgUploadService {
 			String suffix=FilenameUtils.getExtension(fileName);//获取文件后缀名
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 			String date = df.format(new Date());
-			String newFileName = "store"+date+ "a." + suffix;
+			String newFileName = "store"+date+ "." + suffix;
 			File targetFile = new File(dir,newFileName);
 			file.transferTo(targetFile);
 			return newFileName;
