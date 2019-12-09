@@ -14,7 +14,7 @@ import cn.yang.store.dao.GoodsTypeDao;
 import cn.yang.store.entity.Goods;
 import cn.yang.store.entity.GoodsImage;
 import cn.yang.store.entity.GoodsParameter;
-import cn.yang.store.entity.GoodsType;
+import cn.yang.store.entity.Category;
 
 @Service
 @Transactional //update或者delete操作需要事务，需要再service层定义事务，  表示spring的事务注解
@@ -48,15 +48,15 @@ public class GoodsService {
 		goodsDao.deleteGoodsById(goodsId);
 	}
 	
-	public List<GoodsType> findGoodsTypeList() {
+	public List<Category> findGoodsTypeList() {
 		return goodsTypeDao.findGoodsTypeListAll();
 	}
 
-	public void saveGoodsType(GoodsType goodsType) {
+	public void saveGoodsType(Category goodsType) {
 		goodsTypeDao.save(goodsType);
 	}
 
-	public GoodsType findOneGoodsType(Integer goodsTypeId) {
+	public Category findOneGoodsType(Integer goodsTypeId) {
 		return goodsTypeDao.findOneGoodsType(goodsTypeId);
 	}
 	
@@ -80,8 +80,8 @@ public class GoodsService {
 		goodsParameterDao.deleteGoodsParameterById(goodsParameterId);
 	}
 
-	public GoodsImage findOneGoodsImageById(Integer goodsImageId) {
-		return goodsImageDao.findOneGoodsImageById(goodsImageId);
+	public List<GoodsImage> findGoodsImageById(Integer goodsImageId) {
+		return goodsImageDao.findGoodsImageById(goodsImageId);
 	}
 
 	public List<GoodsImage> findGoodsImageList() {
@@ -89,6 +89,7 @@ public class GoodsService {
 	}
 
 	public void saveGoodsImage(GoodsImage goodsImage) {
+		System.out.println("goodsImage的信息为："+goodsImage);
 		goodsImageDao.save(goodsImage);
 	}
 	

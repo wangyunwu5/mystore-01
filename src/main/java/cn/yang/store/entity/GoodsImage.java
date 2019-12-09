@@ -11,8 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * 商品图片
+ * @author Administrator
+ *
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)//设置时间
 @Table(name="goods_image")
@@ -25,13 +31,13 @@ public class GoodsImage {
 	private Integer id;
 	
 	@Column(name="goods_id")
-	private Integer goodsId;//商品编号
+	private String goodsId;//商品id
 	
 	@Column(name="image_url")
-	private String imageUrl;//商品图片
+	private String imageUrl;//商品图片路径
 	
 	@Column(name="image_type")
-	private String imageType;//图片类型
+	private Integer imageType;//图片类型,0为轮播图，1为介绍图
 	
 	@Column(name="image_index")
 	private Integer imageIndex;//图片下标，编号
@@ -41,10 +47,11 @@ public class GoodsImage {
 	private Date createTime;//图片创建时间
 	
 	@Column(name="update_time")
+	@LastModifiedDate
 	private Date updateTime;//图片更新时间
 	
-	@Column(name="is_delete")
-	private Integer isDelete;
+	@Column(name="status",columnDefinition="tinyint default 0")
+	private Integer status=0;//状态，0为正常，1为禁用，2为删除
 
 	public Integer getId() {
 		return id;
@@ -54,11 +61,11 @@ public class GoodsImage {
 		this.id = id;
 	}
 
-	public Integer getGoodsId() {
+	public String getGoodsId() {
 		return goodsId;
 	}
 
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(String goodsId) {
 		this.goodsId = goodsId;
 	}
 
@@ -70,11 +77,11 @@ public class GoodsImage {
 		this.imageUrl = imageUrl;
 	}
 
-	public String getImageType() {
+	public Integer getImageType() {
 		return imageType;
 	}
 
-	public void setImageType(String imageType) {
+	public void setImageType(Integer imageType) {
 		this.imageType = imageType;
 	}
 
@@ -102,20 +109,19 @@ public class GoodsImage {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getIsDelete() {
-		return isDelete;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "GoodsImage [id=" + id + ", goodsId=" + goodsId + ", imageUrl=" + imageUrl + ", imageType=" + imageType
 				+ ", imageIndex=" + imageIndex + ", createTime=" + createTime + ", updateTime=" + updateTime
-				+ ", isDelete=" + isDelete + "]";
+				+ ", status=" + status + "]";
 	}
-
 	
 }

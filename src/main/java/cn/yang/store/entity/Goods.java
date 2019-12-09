@@ -15,8 +15,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
+/**
+ * 商品，类似spu
+ * @author Administrator
+ *
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)//设置时间
 @Table(name="goods")
@@ -27,20 +30,38 @@ public class Goods {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //自增主键
 	private Integer id;
 	
+	@Column(name="goods_no")
+	private String goodsNo;//商品编号
+	
 	@Column(name="goods_name")
 	private String goodsName;//商品名称
 	
-	@Column(name="goods_type_id")
-	private String goodsTypeId;
+	@Column(name="slogan")
+	private String slogan;//广告语
 	
-	@Column(name="scan")
-	private Integer scan;//浏览量，org.springframework.data.annotation
+	@Column(name="category_id")
+	private Integer categoryId;//类目id
 	
-	@Column(name="sales")
-	private Integer sales;//销量
+	@Column(name="brand_id")
+	private Integer brandId;//品牌id
 	
-	@Column(name="goods_describe")
-	private String goodsDescribe;//商品描述
+	@Column(name="scan",columnDefinition="tinyint default 0")
+	private Integer scan =0;//浏览量
+	
+	@Column(name="sales",columnDefinition="tinyint default 0")
+	private Integer sales =0;//销量
+	
+	@Column(name="love",columnDefinition="tinyint default 0")
+	private Integer love =0;//点赞量
+	
+	@Column(name="describe")
+	private String describe;//商品描述
+	
+	@Column(name="status",columnDefinition="tinyint default 0")
+	private Integer status=0;//状态，0为上架，1为下架，2为删除
+	
+	@Column(name="popular",columnDefinition="tinyint default 0")
+	private Integer popular=0;//是否热门，0为非热门，1为热门
 	
 	@Column(name="create_time")
 	@CreatedDate
@@ -49,9 +70,6 @@ public class Goods {
 	@Column(name="update_time")
 	@LastModifiedDate
 	private Date updateTime;//更新时间
-	
-	@Column(name="is_delete")
-	private Integer isDelete;
 
 	public Integer getId() {
 		return id;
@@ -59,6 +77,14 @@ public class Goods {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getGoodsNo() {
+		return goodsNo;
+	}
+
+	public void setGoodsNo(String goodsNo) {
+		this.goodsNo = goodsNo;
 	}
 
 	public String getGoodsName() {
@@ -69,12 +95,28 @@ public class Goods {
 		this.goodsName = goodsName;
 	}
 
-	public String getGoodsTypeId() {
-		return goodsTypeId;
+	public String getSlogan() {
+		return slogan;
 	}
 
-	public void setGoodsTypeId(String goodsTypeId) {
-		this.goodsTypeId = goodsTypeId;
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Integer getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Integer brandId) {
+		this.brandId = brandId;
 	}
 
 	public Integer getScan() {
@@ -93,12 +135,36 @@ public class Goods {
 		this.sales = sales;
 	}
 
-	public String getGoodsDescribe() {
-		return goodsDescribe;
+	public Integer getLove() {
+		return love;
 	}
 
-	public void setGoodsDescribe(String goodsDescribe) {
-		this.goodsDescribe = goodsDescribe;
+	public void setLove(Integer love) {
+		this.love = love;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getPopular() {
+		return popular;
+	}
+
+	public void setPopular(Integer popular) {
+		this.popular = popular;
 	}
 
 	public Date getCreateTime() {
@@ -117,19 +183,12 @@ public class Goods {
 		this.updateTime = updateTime;
 	}
 
-	public Integer isDelete() {
-		return isDelete;
-	}
-
-	public void setDelete(Integer isDelete) {
-		this.isDelete = isDelete;
-	}
-
 	@Override
 	public String toString() {
-		return "Goods [id=" + id + ", goodsName=" + goodsName + ", goodsTypeId=" + goodsTypeId + ", scan=" + scan
-				+ ", sales=" + sales + ", goodsDescribe=" + goodsDescribe + ", createTime=" + createTime
-				+ ", updateTime=" + updateTime + ", isDelete=" + isDelete + "]";
+		return "Goods [id=" + id + ", goodsNo=" + goodsNo + ", goodsName=" + goodsName + ", slogan=" + slogan
+				+ ", categoryId=" + categoryId + ", brandId=" + brandId + ", scan=" + scan + ", sales=" + sales
+				+ ", love=" + love + ", describe=" + describe + ", status=" + status + ", popular=" + popular
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 	
 }

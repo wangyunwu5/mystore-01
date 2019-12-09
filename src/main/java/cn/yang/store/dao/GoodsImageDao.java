@@ -11,7 +11,7 @@ public interface GoodsImageDao extends JpaRepository<GoodsImage, Integer> {
 
 	
 	@Query("select gi from GoodsImage as gi where gi.id=?1")
-	GoodsImage findOneGoodsImageById(Integer goodsImageId);
+	List<GoodsImage> findGoodsImageById(Integer goodsImageId);
 
 	@Query("select gi from GoodsImage as gi")
 	List<GoodsImage> findGoodsImageList();

@@ -14,22 +14,36 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
+/**
+ * 品牌
+ * @author Administrator
+ *
+ */
 @Entity
-@EntityListeners(AuditingEntityListener.class)//设置时间
-@Table(name="goods_type")
-public class GoodsType {
-
+@EntityListeners(AuditingEntityListener.class)
+@Table(name="brand")
+public class Brand {
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //自增主键
-	private Integer id;
+	private Integer id;//品牌id
 	
-	@Column(name="goods_type_id")
-	private String goodsTypeId;//商品名称
+
+	@Column(name="name")
+	private String name;//品牌名称
 	
-	@Column(name="goods_type_name")
-	private String goodsTypeName;//商品名称]
+
+	@Column(name="logo_url")
+	private String logoUrl;//品牌logo路径
+	
+
+	@Column(name="describe")
+	private String describe;//品牌介绍
+	
+
+	@Column(name="goods_no")
+	private String goodsNo;//商品编号
 	
 	@Column(name="create_time")
 	@CreatedDate
@@ -39,8 +53,8 @@ public class GoodsType {
 	@LastModifiedDate
 	private Date updateTime;//更新时间
 	
-	@Column(name="is_delete")
-	private Integer isDelete;
+	@Column(name="is_delete",columnDefinition="tinyint default 0")
+	private Integer isDelete = 0;//是否删除，0为没有删除，1为删除
 
 	public Integer getId() {
 		return id;
@@ -50,20 +64,36 @@ public class GoodsType {
 		this.id = id;
 	}
 
-	public String getGoodsTypeId() {
-		return goodsTypeId;
+	public String getName() {
+		return name;
 	}
 
-	public void setGoodsTypeId(String goodsTypeId) {
-		this.goodsTypeId = goodsTypeId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getGoodsTypeName() {
-		return goodsTypeName;
+	public String getLogoUrl() {
+		return logoUrl;
 	}
 
-	public void setGoodsTypeName(String goodsTypeName) {
-		this.goodsTypeName = goodsTypeName;
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+
+	public String getGoodsNo() {
+		return goodsNo;
+	}
+
+	public void setGoodsNo(String goodsNo) {
+		this.goodsNo = goodsNo;
 	}
 
 	public Date getCreateTime() {
@@ -92,8 +122,9 @@ public class GoodsType {
 
 	@Override
 	public String toString() {
-		return "GoodsType [id=" + id + ", goodsTypeId=" + goodsTypeId + ", goodsTypeName=" + goodsTypeName
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", isDelete=" + isDelete + "]";
+		return "Brand [id=" + id + ", name=" + name + ", logoUrl=" + logoUrl + ", describe=" + describe + ", goodsNo="
+				+ goodsNo + ", createTime=" + createTime + ", updateTime=" + updateTime + ", isDelete=" + isDelete
+				+ "]";
 	}
-
+	
 }

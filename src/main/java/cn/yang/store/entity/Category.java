@@ -14,24 +14,35 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * 商品类目
+ * @author Administrator
+ *
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)//设置时间
-@Table(name="goods_parameter")
-public class GoodsParameter {
-	
+@Table(name="category")
+public class Category {
+
 	@Id
 	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
-	private Integer id;//自增主键
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //自增主键
+	private Integer id;
 	
 	@Column(name="pid")
 	private Integer pid;//父亲id
 	
-	@Column(name="para_name")
-	private String paraName;//商品参数名称
+	@Column(name="name")
+	private String name;//类目名称
 	
-	@Column(name="is_delete",columnDefinition="tinyint default 0")
-	private Integer isDelete = 0;//是否删除，0为不删除，1为删除
+	@Column(name="level")
+	private Integer level;//类目级别，一级、二级、三级...
+	
+	@Column(name="sort")
+	private Integer sort;//类目排序
+	
+	@Column(name="status",columnDefinition="tinyint default 0")
+	private Integer status = 0;//状态，0为正常，1为禁用
 	
 	@Column(name="create_time")
 	@CreatedDate
@@ -57,20 +68,36 @@ public class GoodsParameter {
 		this.pid = pid;
 	}
 
-	public String getParaName() {
-		return paraName;
+	public String getName() {
+		return name;
 	}
 
-	public void setParaName(String paraName) {
-		this.paraName = paraName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Integer getIsDelete() {
-		return isDelete;
+	public Integer getLevel() {
+		return level;
 	}
 
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public Date getCreateTime() {
@@ -91,8 +118,8 @@ public class GoodsParameter {
 
 	@Override
 	public String toString() {
-		return "GoodsParameter [id=" + id + ", pid=" + pid + ", paraName=" + paraName + ", isDelete=" + isDelete
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "Category [id=" + id + ", pid=" + pid + ", name=" + name + ", level=" + level + ", sort=" + sort
+				+ ", status=" + status + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
-
+	
 }

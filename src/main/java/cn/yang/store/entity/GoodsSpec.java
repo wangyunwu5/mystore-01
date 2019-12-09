@@ -44,8 +44,8 @@ public class GoodsSpec {
 	@LastModifiedDate
 	private Date updateTime;//更新时间
 	
-	@Column(name="is_delete")
-	private Integer isDelete;
+	@Column(name="is_delete",columnDefinition="tinyint default 0")
+	private Integer isDelete = 0;
 
 	public Integer getId() {
 		return id;

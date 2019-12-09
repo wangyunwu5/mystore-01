@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import cn.yang.store.entity.GoodsType;
+import cn.yang.store.entity.Category;
 
-public interface GoodsTypeDao extends JpaRepository<GoodsType, Integer> {
+public interface GoodsTypeDao extends JpaRepository<Category, Integer> {
 
 	@Query("select gt from GoodsType as gt")
-	List<GoodsType> findGoodsTypeListAll();
+	List<Category> findGoodsTypeListAll();
 	@Query("select gt from GoodsType as gt where gt.id=?1")
-	GoodsType findOneGoodsType(Integer goodsTypeId);
+	Category findOneGoodsType(Integer goodsTypeId);
 	
 	@Modifying 
 	@Query("update GoodsType as gt set gt.isDelete = 1 where gt.id=?1")

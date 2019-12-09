@@ -14,29 +14,37 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * 属性值
+ * @author Administrator
+ *
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)//设置时间
-@Table(name="goods_parameter")
-public class GoodsParameter {
+@Table(name="param_value")
+public class ParamValue {
 	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Integer id;//自增主键
 	
-	@Column(name="pid")
-	private Integer pid;//父亲id
+	@Column(name="param_id")
+	private Integer paramId;//参数id
 	
-	@Column(name="para_name")
-	private String paraName;//商品参数名称
+	@Column(name="value_name")
+	private String valueName;//属性值名称
 	
-	@Column(name="is_delete",columnDefinition="tinyint default 0")
-	private Integer isDelete = 0;//是否删除，0为不删除，1为删除
+	@Column(name="image_url")
+	private String imageUrl;//属性值对应的图片路径，比如手机玫瑰金
+	
+	@Column(name="status",columnDefinition="tinyint default 0")
+	private Integer status = 0;//状态，0为正常，1为禁用
 	
 	@Column(name="create_time")
 	@CreatedDate
 	private Date createTime;//创建时间
-	
+
 	@Column(name="update_time")
 	@LastModifiedDate
 	private Date updateTime;//更新时间
@@ -49,28 +57,36 @@ public class GoodsParameter {
 		this.id = id;
 	}
 
-	public Integer getPid() {
-		return pid;
+	public Integer getParamId() {
+		return paramId;
 	}
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setParamId(Integer paramId) {
+		this.paramId = paramId;
 	}
 
-	public String getParaName() {
-		return paraName;
+	public String getValueName() {
+		return valueName;
 	}
 
-	public void setParaName(String paraName) {
-		this.paraName = paraName;
+	public void setValueName(String valueName) {
+		this.valueName = valueName;
 	}
 
-	public Integer getIsDelete() {
-		return isDelete;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public Date getCreateTime() {
@@ -91,8 +107,8 @@ public class GoodsParameter {
 
 	@Override
 	public String toString() {
-		return "GoodsParameter [id=" + id + ", pid=" + pid + ", paraName=" + paraName + ", isDelete=" + isDelete
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "ParamValue [id=" + id + ", paramId=" + paramId + ", valueName=" + valueName + ", imageUrl=" + imageUrl
+				+ ", status=" + status + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
-
+	
 }
