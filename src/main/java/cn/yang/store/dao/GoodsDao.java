@@ -18,6 +18,6 @@ public interface GoodsDao extends JpaRepository<Goods, Integer> {
 	 * jpql不支持insert操作。
 	 */
 	@Modifying 
-	@Query("update Goods as g set g.isDelete = 1 where g.id=?1")
+	@Query("update Goods as g set g.status = 2 where g.id=?1")
 	void deleteGoodsById(Integer goodsId);
 }

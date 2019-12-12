@@ -32,8 +32,8 @@ public class Category {
 	@Column(name="pid")
 	private Integer pid;//父亲id
 	
-	@Column(name="name")
-	private String name;//类目名称
+	@Column(name="cate_name")
+	private String cateName;//类目名称
 	
 	@Column(name="level")
 	private Integer level;//类目级别，一级、二级、三级...
@@ -67,13 +67,13 @@ public class Category {
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getCateName() {
+		return cateName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 
 	public Integer getLevel() {
@@ -81,7 +81,11 @@ public class Category {
 	}
 
 	public void setLevel(Integer level) {
-		this.level = level;
+		if(this.pid>=0) {
+			this.level = this.pid+1;
+		}else {
+			this.level = 0;
+		}
 	}
 
 	public Integer getSort() {
@@ -118,7 +122,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", pid=" + pid + ", name=" + name + ", level=" + level + ", sort=" + sort
+		return "Category [id=" + id + ", pid=" + pid + ", cateName=" + cateName + ", level=" + level + ", sort=" + sort
 				+ ", status=" + status + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 	

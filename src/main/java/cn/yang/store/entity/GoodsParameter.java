@@ -14,6 +14,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * 属性
+ * @author Administrator
+ *
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)//设置时间
 @Table(name="goods_parameter")

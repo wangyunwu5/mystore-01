@@ -10,10 +10,10 @@ import cn.yang.store.entity.GoodsImage;
 public interface GoodsImageDao extends JpaRepository<GoodsImage, Integer> {
 
 	
+	@Query("select gi from GoodsImage as gi where gi.goodsId=?1")
+	List<GoodsImage> findGoodsImageById(Integer goodId);
 	@Query("select gi from GoodsImage as gi where gi.id=?1")
-	List<GoodsImage> findGoodsImageById(Integer goodsImageId);
+	GoodsImage findGoodsImageByImageId(Integer id);
 
-	@Query("select gi from GoodsImage as gi")
-	List<GoodsImage> findGoodsImageList();
 
 }

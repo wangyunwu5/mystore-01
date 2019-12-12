@@ -19,4 +19,16 @@ public interface GoodsParameterDao extends JpaRepository<GoodsParameter, Integer
 	@Modifying 
 	@Query("update GoodsParameter as gp set gp.isDelete = 1 where gp.id=?1")
 	void deleteGoodsParameterById(Integer goodsParameterId);
+	
+	@Query("select gp.id from GoodsParameter as gp where gp.paraName=?1")
+	Integer findGoodsParameterByName(String paramName);
+
+	@Query("select gp from GoodsParameter as gp, ParamGoods as pg where gp.id=pg.paramId and pg.goodsId=?1")
+	List<GoodsParameter> findParamByGoodsId(Integer goodsId);
+
+	@Query("select gp from GoodsParameter as gp, ParamCate as pc where gp.id=pc.paramId and pc.cateId=?1")
+	List<GoodsParameter> findParameterBycateId(Integer cateId);
+
+	@Query("select gp from GoodsParameter as gp where gp.id=?1")
+	GoodsParameter findParamById(Integer id);
 }

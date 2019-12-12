@@ -54,8 +54,8 @@ public class Goods {
 	@Column(name="love",columnDefinition="tinyint default 0")
 	private Integer love =0;//点赞量
 	
-	@Column(name="describe")
-	private String describe;//商品描述
+	@Column(name="goods_describe")
+	private String goodsDescribe;//商品描述
 	
 	@Column(name="status",columnDefinition="tinyint default 0")
 	private Integer status=0;//状态，0为上架，1为下架，2为删除
@@ -143,12 +143,12 @@ public class Goods {
 		this.love = love;
 	}
 
-	public String getDescribe() {
-		return describe;
+	public String getGoodsDescribe() {
+		return goodsDescribe;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public void setGoodsDescribe(String goodsDescribe) {
+		this.goodsDescribe = goodsDescribe;
 	}
 
 	public Integer getStatus() {
@@ -187,7 +187,7 @@ public class Goods {
 	public String toString() {
 		return "Goods [id=" + id + ", goodsNo=" + goodsNo + ", goodsName=" + goodsName + ", slogan=" + slogan
 				+ ", categoryId=" + categoryId + ", brandId=" + brandId + ", scan=" + scan + ", sales=" + sales
-				+ ", love=" + love + ", describe=" + describe + ", status=" + status + ", popular=" + popular
+				+ ", love=" + love + ", goodsDescribe=" + goodsDescribe + ", status=" + status + ", popular=" + popular
 				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 	

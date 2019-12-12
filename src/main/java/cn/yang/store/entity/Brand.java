@@ -30,20 +30,16 @@ public class Brand {
 	private Integer id;//品牌id
 	
 
-	@Column(name="name")
-	private String name;//品牌名称
+	@Column(name="brand_name")
+	private String brandName;//品牌名称
 	
 
 	@Column(name="logo_url")
 	private String logoUrl;//品牌logo路径
 	
 
-	@Column(name="describe")
-	private String describe;//品牌介绍
-	
-
-	@Column(name="goods_no")
-	private String goodsNo;//商品编号
+	@Column(name="brand_describe")
+	private String brandDescribe;//品牌介绍
 	
 	@Column(name="create_time")
 	@CreatedDate
@@ -64,12 +60,13 @@ public class Brand {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getBrandName() {
+		return brandName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	public String getLogoUrl() {
@@ -80,20 +77,13 @@ public class Brand {
 		this.logoUrl = logoUrl;
 	}
 
-	public String getDescribe() {
-		return describe;
+
+	public String getBrandDescribe() {
+		return brandDescribe;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
-
-	public String getGoodsNo() {
-		return goodsNo;
-	}
-
-	public void setGoodsNo(String goodsNo) {
-		this.goodsNo = goodsNo;
+	public void setBrandDescribe(String brandDescribe) {
+		this.brandDescribe = brandDescribe;
 	}
 
 	public Date getCreateTime() {
@@ -119,12 +109,9 @@ public class Brand {
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-
 	@Override
 	public String toString() {
-		return "Brand [id=" + id + ", name=" + name + ", logoUrl=" + logoUrl + ", describe=" + describe + ", goodsNo="
-				+ goodsNo + ", createTime=" + createTime + ", updateTime=" + updateTime + ", isDelete=" + isDelete
+		return "Brand [id=" + id + ", brandName=" + brandName + ", logoUrl=" + logoUrl + ", brandDescribe=" + brandDescribe +", createTime=" + createTime + ", updateTime=" + updateTime + ", isDelete=" + isDelete
 				+ "]";
 	}
-	
 }

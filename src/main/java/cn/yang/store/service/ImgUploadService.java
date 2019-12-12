@@ -15,12 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.util.StringUtil;
 
+import cn.yang.store.common.NumberBuilder;
+
 @Service
 @Transactional
 public class ImgUploadService {
 		
 	@Value("${Img.path}")
 	private String rootpath;
+	
+	private NumberBuilder nb;
 	/**
 	 * 上传单张图片
 	 * @param file
@@ -38,7 +42,8 @@ public class ImgUploadService {
 			String suffix=FilenameUtils.getExtension(fileName);//获取文件后缀名
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 			String date = df.format(new Date());
-			String newFileName = "store"+date+ "." + suffix;
+			String number = nb.getFixLengthNumberToString(1);
+			String newFileName = "store"+date+number+"." + suffix;
 			File targetFile = new File(dir,newFileName);
 			file.transferTo(targetFile);
 			return newFileName;
